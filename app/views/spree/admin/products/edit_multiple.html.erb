@@ -74,7 +74,7 @@
                 <td><%= product.sku %></td>
                 <td><%= product.name %></td>
                 <td><%= product.price %></td>
-                <td class="has_image"><%= product.images.any? ? link_to image_tag('admin/icons/camera.png', :title => t("sim.has_photo")), admin_product_images_url(product)image_tag('admin/icons/camera.png', :title => t("sim.has_photo")) : link_to '...', admin_product_new_image_url(product) %></td>
+                <td class="has_image"><%= product.images.any? ? link_to(image_tag('admin/icons/camera.png', :title => t("sim.has_photo")), admin_product_images_url(product)) : link_to('...', admin_product_new_image_url(product)) %></td>
                 <td class="actions">
                   <%= form_for product, :url => admin_product_path(product), :remote => true, :html => {:style => 'display:inline'} do |f| %>
                       <% if product.active? %>
