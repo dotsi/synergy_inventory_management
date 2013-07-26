@@ -1,0 +1,25 @@
+---
+sl:
+  sim:
+    edit_multiple_products: "Hitro urejanje izdelkov"
+    with_selected: "Izbranim izdelkom"
+    catalog: "Katalog"
+    publish_from: "Objavi od"
+    hide_from_now: "Skrij"
+    add_taxon: "dodaj takson"
+    delete: "Izbriši"
+    go: "Osveži"
+    per_page: "Na stran"
+    photo: "Slika"
+    has_photo: "Izdelek ima sliko"
+    products_successfully_updated: "Izdelki uspešno osveženi"
+    products_successfully_deleted: "Izdelki uspešno zbrisani"
+    requires_at_least_one_taxon: "Zahteva vsaj en takson"
+    select_action: "Izberi možnost"
+    select_products: "Izberi izdelke"
+    new_product_here: "Nov izdelek tem taksonu"
+    confirm_destroy: "Res želiš izbrisati izbrane izdelke?"
+    products_actions: "Možnosti"
+    published_hide: "Objavljen (skrij s klikom)"
+    unpublished_show: "Neobjavljen (objavi s klikom)"
+

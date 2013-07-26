@@ -27,7 +27,7 @@
         </div>
       <% end %>
 
-      <div class="twelve columns">
+      <div class="twelve columns alpha omega">
         <fieldset id="products_actions">
           <legend><%= t("sim.with_selected") %>:</legend>
           <div class="four columns">
@@ -53,17 +53,19 @@
 
       <div class="clear"></div>
 
-      <div id="products_list" class="twelve columns">
+      <div id="products_list" class="twelve columns alpha omega">
         <div id="current_path"><%= @taxon.self_and_ancestors.map {|tax| link_to tax.name, admin_edit_multiple_products_path(tax) }.join(" > ").html_safe  %></div>
 
         <table class="index" id="listing_products">
           <thead>
             <tr>
               <th><%= check_box_tag 'check-all', 1, false, :id => 'check-all' %></th>
-              <th><%= t("sku") %></th>
-              <th><%= sort_link @search, :name, t("name") %></th>
-              <th><%= sort_link @search, :master_default_price_amount, t("master_price") %></th>
               <th><%= t("sim.photo") %></th>
+              <th><%= t("sku") %></th>
+              <th><%= sort_link @search, :name, t("name") %> | <%= sort_link @search, :promo, t("promo") %> | <%= sort_link @search, :comment, t("comment") %></th>
+              <th><%=  sort_link @search, :tax_category_id, t("tax_category") %></th>
+              <th><%= sort_link @search, :master_default_price_amount, t("master_price") %></th>
+              <th><%= sort_link @search, :master_sale_price, t("sale_price") %></th>
               <th class="actions"></th>
             </tr>
           </thead>
@@ -71,10 +73,15 @@
             <% @collection.each do |product| %>
               <tr id="<%= dom_id product %>">
                 <td><%= check_box_tag 'product_ids[]', product.id, false, :class => 'product-select' %></td>
-                <td><%= product.sku %></td>
-                <td><%= product.name %></td>
-                <td><%= product.price %></td>
-                <td class="has_image"><%= product.images.any? ? link_to(image_tag('admin/icons/camera.png', :title => t("sim.has_photo")), admin_product_images_url(product)) : link_to('...', admin_product_images_url(product)) %></td>
+                <td class="has_image"><%= product.images.any? ? link_to(mini_image(product), admin_product_images_url(product)) : link_to('...', admin_product_images_url(product)) %></td>
+                <td><%= best_in_place [:admin,product], :sku, :type => :input, :ok_button => 'OK', :cancel_button => 'x' %><%# product.sku %></td>
+                <td><%= product.name %> 
+                  <br><%= best_in_place [:admin,product], :promo, :type => :input, :ok_button => 'OK', :cancel_button => 'x' %>
+                  <br><%= best_in_place [:admin,product], :comment, :type => :input, :ok_button => 'OK', :cancel_button => 'x' %>
+                </td>
+                <td><%= best_in_place [:admin,product], :tax_category_id, :type => :select, :collection => @tax_categories %></td>
+                <td><%= best_in_place [:admin,product], :price, :type => :input, :ok_button => 'OK', :cancel_button => 'x', :display_with => :number_to_currency, :helper_options => {:unit => ""} %><%# product.price %></td>
+                <td><%= best_in_place [:admin,product], :sale_price, :type => :input, :ok_button => 'OK', :cancel_button => 'x' , :display_with => :number_to_currency, :helper_options => {:unit => ""}%></td>
                 <td class="actions">
                   <%= form_for product, :url => admin_product_path(product), :remote => true, :html => {:style => 'display:inline'} do |f| %>
                       <% if product.active? %>

@@ -9,6 +9,8 @@ module Spree
       @taxon = params[:id].present? ? Taxon.find_by_permalink(params[:id]) : Taxon.root
       product_ids = @taxon.present? ? @taxon.self_and_descendants.map { |tax| tax.product_ids }.flatten.uniq : []
 
+      @tax_categories = TaxCategory.all.collect {|tc| [tc.id,tc.name]}
+     
       params[:q] ||= {}
       params[:q][:deleted_at_null] = '1' if params[:q][:deleted_at_null].nil?
       params[:q][:s] ||= 'name asc'
