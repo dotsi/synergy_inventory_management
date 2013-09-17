@@ -32,10 +32,13 @@
           <legend><%= t("sim.with_selected") %>:</legend>
           <div class="four columns">
             <p><label><%= radio_button_tag 'products_action', 'publish_from' %> <%= t("sim.publish_from") %></label>
-              <%= text_field 'product', :available_on, :style => 'width:100px', :class => 'datepicker' %></p>
+              <%= text_field 'product', :available_on, :style => 'width:100px', :class => 'datepicker' %>
+              <%= hidden_field 'product', :published, :id => 'product_publish', :value => '1' %>
+            </p>
 
             <p><label><%= radio_button_tag 'products_action', 'hide' %> <%= t("sim.hide_from_now") %></label></p>
             <%= hidden_field 'product', :available_on, :id => 'product_hide' %>
+            <%= hidden_field 'product', :published, :id => 'product_unpublish' %>
           </div>
           <div class="four columns">
             <p><label><%= radio_button_tag 'products_action', 'add_taxon' %> <%= t("sim.add_taxon") %></label>
@@ -90,6 +93,7 @@
                           <%= link_to ' ', 'javascript:void(0);', :class => 'change-availability icon-check-empty no-text', :title => t('sim.unpublished_show') %>
                       <% end %>
                       <%= f.hidden_field :available_on, :class => 'product_available_on', :value => (product.active? ? '' : Time.zone.now.strftime('%Y/%m/%d')) %>
+                      <%= f.hidden_field :published, :class => 'product_available_on', :value => (product.published ? '' : '1') %>
                   <%- end %>
                   <% unless product.deleted? %>
                     <%= link_to_edit product, :no_text => true %>

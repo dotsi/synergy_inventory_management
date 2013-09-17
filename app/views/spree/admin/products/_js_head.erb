@@ -256,9 +256,11 @@
                 switch ($("input[name='products_action']:checked").val()) {
                     case 'publish_from':
                         $('#product_available_on').clone().appendTo('#product_ids_form');
+                        $('#product_publish').clone().appendTo('#product_ids_form');
                         break;
                     case 'hide':
                         $('#product_hide').clone().appendTo('#product_ids_form');
+                        $('#product_unpublish').clone().appendTo('#product_ids_form');
                         break;
                     case 'add_taxon':
                         $('<input>').attr({
