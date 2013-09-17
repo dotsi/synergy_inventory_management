@@ -93,7 +93,7 @@
                           <%= link_to ' ', 'javascript:void(0);', :class => 'change-availability icon-check-empty no-text', :title => t('sim.unpublished_show') %>
                       <% end %>
                       <%= f.hidden_field :available_on, :class => 'product_available_on', :value => (product.active? ? '' : Time.zone.now.strftime('%Y/%m/%d')) %>
-                      <%= f.hidden_field :published, :class => 'product_available_on', :value => (product.published ? '' : '1') %>
+                      <%= f.hidden_field :published, :class => 'product_published', :value => (product.published ? '' : '1') %>
                   <%- end %>
                   <% unless product.deleted? %>
                     <%= link_to_edit product, :no_text => true %>
